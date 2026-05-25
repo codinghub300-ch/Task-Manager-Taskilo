@@ -1,0 +1,459 @@
+/* ========== GLOBAL STYLES ========== */
+/* Default Light Mode */
+body {
+    background: url('assets/both.webp') no-repeat center center/cover;
+    transition: background 0.5s ease-in-out, color 0.3s;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+/* Light Mode */
+body.light-mode header,
+body.light-mode footer {
+    background: url('assets/light.webp') no-repeat center center/cover;
+    color: white;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background: #121212; /* Dark background for better readability */
+    color: white;
+}
+body.dark-mode header,
+body.dark-mode footer {
+    background: url('assets/dark.webp') no-repeat center center/cover;
+    color: white;
+}
+
+/* Hover effect for links */
+a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease-in-out;
+}
+a:hover {
+    color: gold;
+}
+
+/* ========== HEADER ========== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-bottom: 3px solid gold;
+}
+/* Default Dark Mode (White Text) */
+header h1, 
+header .title {
+    color: white !important;
+    transition: color 0.3s ease-in-out;
+}
+/* Light Mode - Make the Title Black */
+body.light-mode header h1, 
+body.light-mode header .title {
+    color: black !important;
+}
+
+/* Site Name Fix */
+.site-name {
+    transition: color 0.3s ease-in-out;
+}
+body.light-mode .site-name {
+    color: black !important;
+}
+body.dark-mode .site-name {
+    color: white;
+}
+
+/* Navigation Styles */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+nav ul li {
+    margin: 0 15px;
+}
+/* Default link color */
+nav ul li a {
+    text-decoration: none;
+    color: white; /* Default for dark mode */
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+/* Light Mode - Ensure links are black */
+body.light-mode nav ul li a {
+    color: black !important; /* Force black color in light mode */
+}
+/* Active Link */
+nav ul li a.active {
+    border-bottom: 3px solid gold;
+}
+/* Hover Effect */
+nav ul li a:hover {
+    color: gold;
+    background: rgba(255, 255, 255, 0.2);
+}
+body.light-mode nav ul li a:hover {
+    background: rgba(0, 0, 0, 0.1); /* Subtle hover effect in light mode */
+}
+
+/* Theme Toggle Button */
+#themeToggle {
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    background: gold;
+    color: black;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+#themeToggle:hover {
+    background: darkgoldenrod;
+    transform: scale(1.05);
+}
+
+/* ========== TASK BOARD ========== */
+.task-board {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap;
+    
+}
+.task-category {
+    width: 30%;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 15px;
+    border-radius: 10px;
+    min-height: 300px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid gold;
+}
+/* Responsive: Stack categories on small screens */
+@media (max-width: 768px) {
+    .task-board {
+        flex-direction: column;
+        align-items: center;
+    }
+    .task-category {
+        width: 90%;
+        margin-bottom: 15px;
+    }
+}
+.task-category:hover {
+    transform: scale(1.02);
+}
+/* Task Item */
+.task {
+    background: white;
+    color: #333; /* Default text color for light mode */
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: grab;
+    transition: background 0.2s ease-in-out, color 0.3s ease-in-out;
+}
+.task:hover {
+    background: #f9f9f9;
+}
+/* Dark Mode: Make tasks more visible */
+body.dark-mode .task {
+    background: #2a2a2a !important; /* Dark background for tasks in dark mode */
+    color: #f5f5f5 !important;      /* Light text for readability */
+}
+
+/* ========== INFO BOX CONTAINER ========== */
+/* Wrapper for the 3D Flip Effect */
+.info-box-container {
+    perspective: 1000px;
+    width: 280px; /* Slightly smaller */
+    margin: 20px auto 40px; /* Extra bottom margin to prevent overlap */
+}
+.info-box {
+    width: 100%;
+    height: 120px; /* Reduced height */
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out;
+    border-radius: 12px;
+    cursor: pointer;
+}
+/* Ensure the Add Task Section has enough margin */
+.add-task-container {
+    margin-top: 20px; /* Push it down */
+}
+/* Flip Effect & Golden Glow */
+.info-box:hover {
+    transform: rotateY(180deg);
+    box-shadow: 0 0 12px gold;
+}
+/* Front & Back Faces */
+.info-box .front, .info-box .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: linear-gradient(135deg, #fffacd, #ffeb8a);
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+/* Back Side */
+.info-box .back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #f5c71a, #ffd700);
+    color: white;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* Adjust Dark Mode */
+.dark-mode .info-box .front {
+    background: linear-gradient(135deg, #3e3e3e, #6a6a6a);
+    color: white;
+}
+.dark-mode .info-box .back {
+    background: linear-gradient(135deg, #b8860b, #daa520);
+    color: black;
+}
+
+/* ========== FOOTER ========== */
+footer {
+    display: block !important; /* Ensure it's always visible */
+    position: relative;
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);
+    border-top: 3px solid gold;
+}
+.footer-links {
+    margin-top: 10px;
+}
+.footer-links a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+.footer-links a:hover {
+    color: gold;
+}
+
+/* ========== TASK PRIORITY STYLES ========== */
+.task.high {
+    background: #ff6961;
+    border-left: 5px solid red;
+}
+.task.medium {
+    background: #fdfd96;
+    border-left: 5px solid orange;
+}
+.task.low {
+    background: #77dd77;
+    border-left: 5px solid green;
+}
+
+/* ========== TASK EDITING ========== */
+.edit-input {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+}
+
+/* ========== ADD TASK SECTION ========== */
+.add-task-container {
+    text-align: center;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+#newTask {
+    padding: 10px;
+    width: 300px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+#newTask:focus {
+    border-color: gold;
+    outline: none;
+}
+#addTaskBtn {
+    background: linear-gradient(to right, #ff8c00, #ffcc00);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+#addTaskBtn:hover {
+    background: linear-gradient(to right, #ffcc00, #ff8c00);
+    transform: scale(1.05);
+}
+
+/* Styling for Date Input */
+.date-input {
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    outline: none;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: all 0.3s ease-in-out;
+}
+.date-input:hover, .date-input:focus {
+    border-color: #0056b3;
+    background-color: #fff;
+}
+
+/* Styling for Task Due Date Display */
+.task .due-date {
+    display: block;
+    font-size: 12px;
+    color: #555;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* ========== CHARTS SECTION ========== */
+.charts-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    
+}
+.chart-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    width: 350px;
+    border: 2px solid gold;
+}
+.chart-box:hover {
+    transform: scale(1.05);
+}
+body.dark-mode .chart-box {
+    background: rgba(30, 30, 30, 0.9);
+    color: white;
+}
+canvas {
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 350px !important;
+    height: 350px !important;
+}
+
+/* ========== PROGRESS SUMMARY STYLES ========== */
+.progress-summary {
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+    border: 2px solid gold;
+}
+.progress-summary h2 {
+    margin-bottom: 10px;
+    color: inherit;
+}
+.progress-bar-container {
+    width: 100%;
+    height: 25px;
+    background: #eee;
+    border-radius: 12px;
+    margin: 10px auto;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(to right, #ffd700, #ff8c00);
+    border-radius: 12px 0 0 12px;
+    transition: width 0.5s ease;
+}
+#progressText {
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Dark Mode: Progress Summary  */
+body.dark-mode .progress-summary {
+    background: #2a2a2a !important;  /* Dark background for summary panel */
+    color: #f5f5f5 !important;       /* Light text for readability */
+}
+body.dark-mode .progress-summary h2,
+body.dark-mode .progress-summary #progressText {
+    color: #f5f5f5 !important;       /* Force text color in dark mode */
+}
+/* TASK   DARk  */
+body.dark-mode .task-category {
+    background: rgba(40, 40, 40, 0.9); /* Darker background for better visibility */
+    color: white;
+    border: 2px solid gold; /* Golden frame */
+}
+/* Dark Mode - Progress Summary Golden Frame */
+body.dark-mode .progress-summary {
+    background: #2a2a2a !important;  /* Dark background for summary panel */
+    color: #f5f5f5 !important;       /* Light text for readability */
+    border: 2px solid gold;         /* Golden frame */
+}
+
+/* Dark Mode - Chart Box Golden Frame */
+body.dark-mode .chart-box {
+    background: rgba(30, 30, 30, 0.9); /* Dark background for chart box */
+    color: white;
+    border: 2px solid gold;          /* Golden frame */
+}
+html body.light-mode footer {
+    color: black !important;
+}
+/* Force footer text and links to be black in light mode */
+html body.light-mode footer,
+html body.light-mode .footer-links,
+html body.light-mode .footer-links a {
+    color: black !important;
+}
+
+html body.light-mode .footer-links a:hover {
+    color: gold !important;
+}
